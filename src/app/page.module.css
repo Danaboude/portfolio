@@ -1,0 +1,23 @@
+.heroAboutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 10px;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+}
+
+@media (min-width: 768px) {
+  .heroAboutContainer {
+    flex-direction: row;
+    justify-content: space-between; /* Changed from space-around for tighter fit */
+    align-items: flex-start;
+    width: 100%; /* Ensure it takes full width */
+    height: 100vh; /* Ensure it takes full viewport height */
+  }
+}

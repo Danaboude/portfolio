@@ -1,0 +1,41 @@
+.education {
+  padding: 4rem 2rem;
+  background: var(--background);
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--primary);
+}
+
+.educationItem {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 0 auto 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.educationItem:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-color: var(--secondary);
+}
+
+.educationItem h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.educationItem h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--secondary);
+}

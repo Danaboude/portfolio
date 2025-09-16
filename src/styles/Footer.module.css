@@ -1,0 +1,21 @@
+.footer {
+  padding: 2rem;
+  text-align: center;
+  background: var(--background);
+  border-top: 1px solid var(--border-color);
+}
+
+.socials {
+  margin-bottom: 1rem;
+}
+
+.socials a {
+  font-size: 2rem;
+  margin: 0 1rem;
+  color: var(--foreground);
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: var(--primary);
+}
