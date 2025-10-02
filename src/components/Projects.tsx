@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/Projects.module.css';
-import carouselStyles from '../styles/ImageCarousel.module.css'; // Import new carousel styles
-import MotionWrapper from './MotionWrapper';
+import carouselStyles from '../styles/ImageCarousel.module.css';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -96,6 +99,26 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onImageClick }) =
 
 const Projects = () => {
   const [fullScreenImage, setFullScreenImage] = useState<{ src: string; allImages: string[]; } | null>(null);
+  const sectionRef = useRef(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+
+    if (sectionElement) {
+      gsap.from(cardRefs.current, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.5,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: sectionElement,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, []);
 
   const openFullScreen = (imageSrc: string, allImages: string[]) => {
     setFullScreenImage({ src: imageSrc, allImages });
@@ -122,25 +145,27 @@ const Projects = () => {
   };
 
   return (
-    <MotionWrapper>
-      <section id="projects" className={styles.projects}>
-        <h2 className={styles.title}>Key Projects</h2>
-        <div className={styles.grid}>
-          {projects.map((project, index) => (
-            <div key={index} className={styles.card}>
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
-              <div className={styles.technologies}>
-                {project.technologies.map((tech, i) => (
-                  <span key={i} className={styles.tech}>{tech}</span>
-                ))}
-              </div>
-              {project.images && <ImageCarousel images={project.images} onImageClick={(imageSrc) => openFullScreen(imageSrc, project.images || [])} />} {/* Render carousel if images exist */}
-              {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.link}>Visit Project</a>}
+    <section id="projects" className={styles.projects} ref={sectionRef}>
+      <h2 className={styles.title}>Key Projects</h2>
+      <div className={styles.grid}>
+        {projects.map((project, index) => (
+          <div 
+            key={index} 
+            className={styles.card}
+            ref={el => cardRefs.current[index] = el}
+          >
+            <h3>{project.name}</h3>
+            <p>{project.description}</p>
+            <div className={styles.technologies}>
+              {project.technologies.map((tech, i) => (
+                <span key={i} className={styles.tech}>{tech}</span>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+            {project.images && <ImageCarousel images={project.images} onImageClick={(imageSrc) => openFullScreen(imageSrc, project.images || [])} />}
+            {project.link && <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.link}>Visit Project</a>}
+          </div>
+        ))}
+      </div>
 
       {fullScreenImage && (
         <div className={carouselStyles.fullScreenOverlay}>
@@ -154,7 +179,7 @@ const Projects = () => {
           <img src={fullScreenImage.src} alt="Full screen" className={carouselStyles.fullScreenImage} />
         </div>
       )}
-    </MotionWrapper>
+    </section>
   );
 };
 

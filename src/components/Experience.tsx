@@ -1,5 +1,10 @@
+"use client";
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/Experience.module.css';
-import MotionWrapper from './MotionWrapper';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
@@ -18,24 +23,50 @@ const experiences = [
 ];
 
 const Experience = () => {
+  const sectionRef = useRef(null);
+  const timelineItemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+
+    if (sectionElement) {
+      timelineItemRefs.current.forEach((item, index) => {
+        if (item) {
+          gsap.from(item, {
+            opacity: 0,
+            x: index % 2 === 0 ? -100 : 100,
+            duration: 1,
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          });
+        }
+      });
+    }
+  }, []);
+
   return (
-    <MotionWrapper>
-      <section id="experience" className={styles.experience}>
-        <h2 className={styles.title}>Professional Experience</h2>
-        <div className={styles.timeline}>
-          {experiences.map((exp, index) => (
-            <div key={index} className={styles.timelineItem}>
-              <div className={styles.timelineContent}>
-                <h3>{exp.role}</h3>
-                <h4>{exp.company} {exp.location && `| ${exp.location}`}</h4>
-                <p className={styles.period}>{exp.period}</p>
-                <p>{exp.description}</p>
-              </div>
+    <section id="experience" className={styles.experience} ref={sectionRef}>
+      <h2 className={styles.title}>Professional Experience</h2>
+      <div className={styles.timeline}>
+        {experiences.map((exp, index) => (
+          <div 
+            key={index} 
+            className={styles.timelineItem}
+            ref={el => timelineItemRefs.current[index] = el}
+          >
+            <div className={styles.timelineContent}>
+              <h3>{exp.role}</h3>
+              <h4>{exp.company} {exp.location && `| ${exp.location}`}</h4>
+              <p className={styles.period}>{exp.period}</p>
+              <p>{exp.description}</p>
             </div>
-          ))}
-        </div>
-      </section>
-    </MotionWrapper>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 
