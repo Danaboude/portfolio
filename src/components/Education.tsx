@@ -7,37 +7,35 @@ import styles from '../styles/Education.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const Education = () => {
-  const sectionRef = useRef(null);
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const itemRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sectionElement = sectionRef.current;
+    const el = itemRef.current;
+    if (!el) return;
 
-    if (sectionElement) {
-      gsap.from(itemRefs.current, {
-        opacity: 0,
-        y: 50,
-        duration: 0.5,
-        stagger: 0.2,
+    gsap.fromTo(el, 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: sectionElement,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      });
-    }
+          trigger: el,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
   }, []);
 
   return (
-    <section id="education" className={styles.education} ref={sectionRef}>
+    <section id="education" className={styles.education}>
       <h2 className={styles.title}>Education</h2>
-      <div className={styles.educationItem} ref={el => itemRefs.current[0] = el}>
-        <h3>MSc in Computer Science (Digital Factory specialization)</h3>
-        <h4>ELTE University, Szombathely, Hungary (Started Sep 2025)</h4>
-      </div>
-      <div className={styles.educationItem} ref={el => itemRefs.current[1] = el}>
-        <h3>Bachelor in Information Technology</h3>
-        <h4>HPU, Homs (Graduated Feb 2024)</h4>
+      <div className={styles.educationItem} ref={itemRef}>
+        <h3>Bachelor in Information Technology (IT Engineering)</h3>
+        <h4>HPU (Hama Private University), Syria</h4>
+        <p className={styles.period}>Sep 2019 - Feb 2024 • GPA: 2.76</p>
       </div>
     </section>
   );

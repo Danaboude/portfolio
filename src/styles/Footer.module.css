@@ -1,21 +1,33 @@
 .footer {
-  padding: 2rem;
+  padding: 4rem 2rem;
   text-align: center;
-  background: var(--background);
   border-top: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(10px);
 }
 
 .socials {
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .socials a {
-  font-size: 2rem;
-  margin: 0 1rem;
   color: var(--foreground);
-  transition: color 0.3s;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+  opacity: 0.6;
 }
 
 .socials a:hover {
   color: var(--primary);
+  opacity: 1;
+  transform: translateY(-5px);
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
 }

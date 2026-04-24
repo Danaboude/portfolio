@@ -1,75 +1,99 @@
 .hero {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 0;
-  background: var(--background);
+  padding: 8rem 0 4rem;
+  background: transparent;
+  text-align: center;
 }
 
 .marquee {
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  margin-bottom: 2rem;
+  transform: rotate(-1deg);
+  background: rgba(139, 92, 246, 0.1);
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .marqueeContent {
   display: flex;
   width: fit-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .marqueeContent span {
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: 5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  padding: 0 4rem;
+}
+
+.marqueeContent span:nth-child(even) {
   color: var(--primary);
-  white-space: nowrap;
-  padding: 0 2rem;
+  -webkit-text-stroke: 0;
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  max-width: 800px;
+  line-height: 1.6;
+  color: var(--foreground);
+  opacity: 0.8;
+  margin-bottom: 2.5rem;
 }
 
 .heroActions {
-  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
+  z-index: 10;
 }
 
 .ctaButton {
-  background-color: var(--primary);
-  color: var(--background);
-  padding: 0.8rem 2rem;
-  border-radius: 5px;
-  text-decoration: none;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ctaButton:hover {
-  background-color: var(--secondary);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5);
 }
 
 .socialLinks {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .socialLinks a {
-  margin: 0 1rem;
   color: var(--foreground);
-  font-size: 1.2rem;
-  transition: color 0.3s;
+  font-size: 1.1rem;
+  opacity: 0.6;
+  transition: all 0.3s;
 }
 
 .socialLinks a:hover {
+  opacity: 1;
   color: var(--secondary);
+  transform: translateY(-2px);
 }

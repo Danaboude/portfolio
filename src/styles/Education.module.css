@@ -1,41 +1,52 @@
 .education {
-  padding: 4rem 2rem;
-  background: var(--background);
-  text-align: center;
+  padding: 6rem 2rem;
+  background: transparent;
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  color: var(--primary);
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: var(--foreground);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .educationItem {
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 0 auto 2rem auto;
   max-width: 800px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  margin: 0 auto 2rem;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
 }
 
 .educationItem:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  border-color: var(--secondary);
+  border-color: var(--primary);
+  transform: scale(1.02);
 }
 
 .educationItem h3 {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
 }
 
 .educationItem h4 {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 600;
+  margin-bottom: 1rem;
   color: var(--secondary);
+}
+
+.period {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

@@ -8,31 +8,34 @@ import carouselStyles from '../styles/ImageCarousel.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
+const projectsData = [
   {
-    name: 'Royz Store E-commerce Platform',
-    description: 'Architected and developed a full-stack e-commerce ecosystem with website, mobile app, admin portal, and delivery system.',
-    technologies: ['Node.js', 'Express.js', 'Next.js', 'React.js', 'Flutter', 'MySQL', 'Firebase (FCM)'],
-    link: 'https://royzstore.com',
+    name: 'Elevate Marketing Agency',
+    description: 'Developed a modern, responsive digital portfolio for a marketing agency focused on visionary storytelling and immersive user experiences. Integrated an automated inquiry and lead-generation system using Resend.',
+    technologies: ['Next.js', 'React.js', 'Resend', 'Tailwind CSS'],
+    link: 'https://elevatemarketinganu.com/',
   },
   {
-    name: 'BAT Online Store',
-    description: 'Developed a wholesale/retail e-commerce app with authentication, smart filtering, and product categorization. Implemented ML-based basket analysis (FP-Growth) and recommendation system.',
-    technologies: ['Flutter', 'Laravel (REST API)', 'Python', 'Flask', 'Machine Learning'],
-    images: [
-      '/BAT Online Store/1.png',
-      '/BAT Online Store/2.png',
-      '/BAT Online Store/3.png',
-      '/BAT Online Store/4.png',
-      '/BAT Online Store/5.png',
-      '/BAT Online Store/6.png',
-      '/BAT Online Store/7.png',
-    ],
+    name: 'Ambots',
+    description: 'Developed a comprehensive e-commerce and educational platform targeting the Saudi drone market. Implemented a seamless marketplace and specialized educational content.',
+    technologies: ['Flutter', 'BLOC', 'Dart', 'RESTful APIs'],
+    link: 'https://play.google.com/store/apps/details?id=com.ambots.drone',
   },
   {
-    name: 'Dental Clinic Application',
-    description: 'Designed and developed a cross-platform medical data management system for Windows and mobile. Features include patient records, appointments, invoices, expenses, localization (Arabic/English), and PDF generation.',
-    technologies: ['Flutter', 'Dart', 'Provider', 'Sqflite', 'PDF generation libraries'],
+    name: 'My Sister Closed',
+    description: 'Developed a mobile application for buying and selling new and used clothing, targeting the Saudi market. Features easy product browsing and a simple seller dashboard.',
+    technologies: ['Flutter', 'GetX', 'Dart', 'Firebase'],
+    link: 'https://play.google.com/store/apps/details?id=com.fashio.app',
+  },
+  {
+    name: 'Beauty Jazan App',
+    description: 'Developed a dual mobile application for service providers and clients. Allows service providers to register staff and clients to browse and book beauty services.',
+    technologies: ['Flutter', 'BLoC', 'Dart', 'Firebase'],
+  },
+  {
+    name: 'Dental Clinic System',
+    description: 'Engineered a cross-platform desktop management system with integrated AI-driven image analysis to automate X-ray evaluations, enhancing diagnostic accuracy.',
+    technologies: ['Flutter', 'Python', 'Flask', 'AI (Image Analysis)', 'Clean Architecture'],
     images: [
       '/Dental Clinic Application/1.png',
       '/Dental Clinic Application/2.png',
@@ -99,25 +102,28 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onImageClick }) =
 
 const Projects = () => {
   const [fullScreenImage, setFullScreenImage] = useState<{ src: string; allImages: string[]; } | null>(null);
-  const sectionRef = useRef(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sectionElement = sectionRef.current;
+    const el = gridRef.current;
+    if (!el) return;
 
-    if (sectionElement) {
-      gsap.from(cardRefs.current, {
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.5,
-        stagger: 0.2,
+    gsap.fromTo(el.children, 
+      { opacity: 0, scale: 0.95, y: 30 },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        y: 0, 
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: sectionElement,
-          start: 'top 80%',
+          trigger: el,
+          start: 'top 85%',
           toggleActions: 'play none none none',
         },
-      });
-    }
+      }
+    );
   }, []);
 
   const openFullScreen = (imageSrc: string, allImages: string[]) => {
@@ -145,15 +151,11 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className={styles.projects} ref={sectionRef}>
+    <section id="projects" className={styles.projects}>
       <h2 className={styles.title}>Key Projects</h2>
-      <div className={styles.grid}>
-        {projects.map((project, index) => (
-          <div 
-            key={index} 
-            className={styles.card}
-            ref={el => cardRefs.current[index] = el}
-          >
+      <div className={styles.grid} ref={gridRef}>
+        {projectsData.map((project, index) => (
+          <div key={index} className={styles.card}>
             <h3>{project.name}</h3>
             <p>{project.description}</p>
             <div className={styles.technologies}>

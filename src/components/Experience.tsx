@@ -8,17 +8,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
-    role: 'Full-Stack Developer (Freelance)',
-    company: 'Remote',
-    period: 'Feb 2020 – Present',
-    description: 'Developed and maintained a portfolio of web and mobile applications for various clients, demonstrating expertise in full-stack development, e-commerce solutions, and AI integration.',
+    role: 'Software Engineer',
+    company: 'aeriez',
+    location: 'Remote',
+    period: 'December 2025 – Present',
+    description: 'Architected and deployed a comprehensive machine health monitoring and internal reporting solution using .NET and Angular. Implemented a secure, real-time messaging broker utilizing RabbitMQ and MQTT protocols. Developed a companion mobile application using Flutter for secure, instantaneous operational reports.',
   },
   {
-    role: 'Project Manager',
-    company: 'Alamoudifitness.com.sa',
-    location: 'Riyadh, Saudi Arabia',
-    period: 'Jun 2023 – Sep 2024',
-    description: 'Led the development and optimization of a high-traffic e-commerce platform, ensuring smooth UX and performance. Improved user retention by 25% through UI/UX enhancements and bug resolution. Managed product listings and implemented SEO best practices. Conducted data analysis to improve sales performance and customer engagement.',
+    role: 'Frontend Developer Intern',
+    company: 'MOSTRO.xyz',
+    location: 'Remote',
+    period: 'November 2025 – December 2025',
+    description: 'Built reusable and optimized UI components using React Native (Expo) to enhance mobile app performance. Contributed to the development of responsive web applications using React.js, Next.js, and Tailwind CSS.',
+  },
+  {
+    role: 'Full-Stack & Mobile Developer (Freelance)',
+    company: 'Remote',
+    period: 'Feb 2020 – Present',
+    description: 'Designed and delivered 10+ production-ready applications, ranging from custom e-commerce platforms to medical management systems and AI-powered tools. Managed end-to-end project lifecycles, from UI/UX implementation using Figma to backend architecture.',
   },
 ];
 
@@ -27,24 +34,24 @@ const Experience = () => {
   const timelineItemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const sectionElement = sectionRef.current;
-
-    if (sectionElement) {
-      timelineItemRefs.current.forEach((item, index) => {
-        if (item) {
-          gsap.from(item, {
-            opacity: 0,
-            x: index % 2 === 0 ? -100 : 100,
-            duration: 1,
+    timelineItemRefs.current.forEach((item, index) => {
+      if (item) {
+        gsap.fromTo(item, 
+          { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+          { 
+            opacity: 1, 
+            x: 0, 
+            duration: 0.8,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: item,
-              start: 'top 80%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
-          });
-        }
-      });
-    }
+          }
+        );
+      }
+    });
   }, []);
 
   return (
@@ -55,7 +62,7 @@ const Experience = () => {
           <div 
             key={index} 
             className={styles.timelineItem}
-            ref={el => timelineItemRefs.current[index] = el}
+            ref={el => { timelineItemRefs.current[index] = el; }}
           >
             <div className={styles.timelineContent}>
               <h3>{exp.role}</h3>

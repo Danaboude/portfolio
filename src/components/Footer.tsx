@@ -30,7 +30,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer} ref={footerRef}>
       <div className={styles.socials}>
-        <a href="https://www.linkedin.com/in/abdalkreem-dandal-a10470234" target="_blank" rel="noopener noreferrer">
+        <a href="https://linkedin.com/in/abdulkareem-dandal-a10470234" target="_blank" rel="noopener noreferrer">
           <FaLinkedin />
         </a>
         <a href="https://github.com/danaboude" target="_blank" rel="noopener noreferrer">

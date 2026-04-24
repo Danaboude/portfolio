@@ -6,48 +6,46 @@ import styles from '../styles/Skills.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const skills = {
-  Backend: ['Node.js', 'Express.js', 'Python', 'Flask', 'PHP', 'Laravel', 'REST APIs'],
-  Frontend: ['Next.js', 'React.js', 'JavaScript', 'HTML', 'CSS', 'Bootstrap', 'Angular'],
-  Mobile: ['Flutter', 'Dart'],
-  Databases: ['MySQL', 'SQL Server', 'Firebase'],
-  'AI & Data': ['Machine Learning', 'FP-Growth', 'Collaborative Filtering'],
-  'DevOps & Tools': ['Git', 'CI/CD', 'GitHub'],
-  'Hardware Integration': ['Arduino', 'Bluetooth'],
+const skillsData = {
+  'Mobile Development': ['Flutter', 'React Native', 'React.js', 'Next.js', 'Tailwind CSS', 'State Management (BLOC, GetX)', 'Angular'],
+  Backend: ['Node.js (Express.js)', '.NET', 'Python (Django/Flask)', 'RESTful APIs'],
+  'Database & Auth': ['PostgreSQL', 'MongoDB', 'SQL Server', 'Firebase'],
+  'DevOps & Tools': ['Docker', 'CI/CD (GitHub Actions)', 'AWS', 'Figma (UI/UX translation)'],
+  Languages: ['English', 'Arabic', 'German'],
 };
 
 const Skills = () => {
-  const sectionRef = useRef(null);
-  const categoryRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sectionElement = sectionRef.current;
+    const el = gridRef.current;
+    if (!el) return;
 
-    if (sectionElement) {
-      gsap.from(categoryRefs.current, {
-        opacity: 0,
-        y: 50,
-        duration: 0.5,
+    const children = el.children;
+    
+    gsap.fromTo(children, 
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.6,
         stagger: 0.1,
+        ease: "power2.out",
         scrollTrigger: {
-          trigger: sectionElement,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      });
-    }
+          trigger: el,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
   }, []);
 
   return (
-    <section id="skills" className={styles.skills} ref={sectionRef}>
+    <section id="skills" className={styles.skills}>
       <h2 className={styles.title}>Skills</h2>
-      <div className={styles.grid}>
-        {Object.entries(skills).map(([category, skillsList], index) => (
-          <div 
-            key={category} 
-            className={styles.category}
-            ref={el => categoryRefs.current[index] = el}
-          >
+      <div className={styles.grid} ref={gridRef}>
+        {Object.entries(skillsData).map(([category, skillsList]) => (
+          <div key={category} className={styles.category}>
             <h3>{category}</h3>
             <ul>
               {skillsList.map((skill) => (

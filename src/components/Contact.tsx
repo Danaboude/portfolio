@@ -31,8 +31,8 @@ const Contact = () => {
       <h2 className={styles.title}>Contact Me</h2>
       <div className={styles.contactInfo}>
         <p>Email: <a href="mailto:danaboude@gmail.com">danaboude@gmail.com</a></p>
-        <p>Phone: +36 703404503</p>
-        <p>Location: Szombathely, Hungary</p>
+        <p>Phone: +1 268 732 7344</p>
+        <p>Location: Saint John's, Antigua and Barbuda</p>
       </div>
     </section>
   );
