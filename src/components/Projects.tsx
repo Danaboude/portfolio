@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/Projects.module.css';
@@ -77,11 +78,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onImageClick }) =
     <div className={carouselStyles.carouselContainer}>
       <div className={carouselStyles.carouselImages} ref={scrollRef}>
         {images.map((image, index) => (
-          <img
+          <Image
             key={index}
             src={image}
             alt={`Project image ${index + 1}`}
             className={carouselStyles.carouselImage}
+            width={400}
+            height={200}
             onClick={() => onImageClick(image)}
           />
         ))}
@@ -178,7 +181,13 @@ const Projects = () => {
               <button className={`${carouselStyles.carouselButton} ${carouselStyles.next}`} onClick={handleNextFullScreen}>&#10095;</button>
             </>
           )}
-          <img src={fullScreenImage.src} alt="Full screen" className={carouselStyles.fullScreenImage} />
+          <Image 
+            src={fullScreenImage.src} 
+            alt="Full screen" 
+            className={carouselStyles.fullScreenImage} 
+            width={1200}
+            height={800}
+          />
         </div>
       )}
     </section>

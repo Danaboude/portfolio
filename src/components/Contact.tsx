@@ -32,7 +32,7 @@ const Contact = () => {
       <div className={styles.contactInfo}>
         <p>Email: <a href="mailto:danaboude@gmail.com">danaboude@gmail.com</a></p>
         <p>Phone: +1 268 732 7344</p>
-        <p>Location: Saint John's, Antigua and Barbuda</p>
+        <p>Location: Saint John&apos;s, Antigua and Barbuda</p>
       </div>
     </section>
   );
