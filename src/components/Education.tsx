@@ -1,41 +1,52 @@
 "use client";
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/Education.module.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Education = () => {
-  const itemRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = itemRef.current;
-    if (!el) return;
-
-    gsap.fromTo(el, 
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 90%",
-          toggleActions: "play none none none"
-        }
-      }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
     );
+
+    if (cardRef.current) observer.observe(cardRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section id="education" className={styles.education}>
-      <h2 className={styles.title}>Education</h2>
-      <div className={styles.educationItem} ref={itemRef}>
-        <h3>Bachelor in Information Technology (IT Engineering)</h3>
-        <h4>HPU (Hama Private University), Syria</h4>
-        <p className={styles.period}>Sep 2019 - Feb 2024 • GPA: 2.76</p>
+      <div className={styles.inner}>
+        <div className={styles.header}>
+          <div className={styles.eyebrow}>Education & Languages</div>
+          <h2 className={styles.title}>Background</h2>
+        </div>
+
+        <div className={styles.card} ref={cardRef}>
+          <p className={styles.degree}>Bachelor in Information Technology</p>
+          <p className={styles.school}>HPU — Hama Private University, Syria</p>
+          <p className={styles.period}>Sep 2019 – Feb 2024</p>
+
+          <div className={styles.langs}>
+            <span className={styles.langTag}>
+              Arabic <span className={styles.langLevel}>Native</span>
+            </span>
+            <span className={styles.langTag}>
+              English <span className={styles.langLevel}>C2</span>
+            </span>
+            <span className={styles.langTag}>
+              German <span className={styles.langLevel}>A2</span>
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );

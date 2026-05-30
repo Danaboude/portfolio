@@ -1,52 +1,125 @@
 .education {
-  padding: 6rem 2rem;
-  background: transparent;
+  padding: 8rem 2rem;
+  background: var(--bg-secondary);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  width: fit-content;
 }
 
 .title {
-  font-size: 3rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 4rem;
-  color: var(--foreground);
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
 }
 
-.educationItem {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  background: var(--card-background);
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.32, 0.72, 0, 1), transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
   padding: 2.5rem;
-  backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.educationItem:hover {
-  border-color: var(--primary);
-  transform: scale(1.02);
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-hover);
 }
 
-.educationItem h3 {
-  font-size: 1.6rem;
+.degree {
+  font-size: 1.35rem;
   font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
   margin-bottom: 0.5rem;
-  color: var(--primary);
 }
 
-.educationItem h4 {
-  font-size: 1.2rem;
+.school {
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  color: var(--secondary);
+  color: var(--accent);
+  margin-bottom: 0.35rem;
 }
 
 .period {
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.langs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.langTag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+}
+
+.langLevel {
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--accent);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .education {
+    padding: 5rem 1.25rem;
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }

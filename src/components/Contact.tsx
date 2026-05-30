@@ -1,38 +1,54 @@
 "use client";
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from '../styles/Contact.module.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Contact = () => {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sectionElement = sectionRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    if (sectionElement) {
-      gsap.from(sectionElement, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        scrollTrigger: {
-          trigger: sectionElement,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      });
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="contact" className={styles.contact} ref={sectionRef}>
-      <h2 className={styles.title}>Contact Me</h2>
-      <div className={styles.contactInfo}>
-        <p>Email: <a href="mailto:danaboude@gmail.com">danaboude@gmail.com</a></p>
-        <p>Phone: +1 268 732 7344</p>
-        <p>Location: Saint John&apos;s, Antigua and Barbuda</p>
+    <section id="contact" className={styles.contact}>
+      <div className={styles.inner} ref={sectionRef}>
+        <div className={styles.eyebrow}>Contact</div>
+        <h2 className={styles.title}>
+          Let&apos;s build<br />something great.
+        </h2>
+        <p className={styles.subtitle}>
+          Open to contract work, freelance projects, and full-time roles.
+        </p>
+
+        <div className={styles.links}>
+          <a href="mailto:danaboude@gmail.com" className={`${styles.contactLink} ${styles.emailCta}`}>
+            danaboude@gmail.com ↗
+          </a>
+          <a href="https://linkedin.com/in/abdulkareem-dandal-a10470234" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+            LinkedIn
+          </a>
+          <a href="https://github.com/danaboude" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>
+            GitHub
+          </a>
+          <a href="tel:+12687327344" className={styles.contactLink}>
+            +1 268 732 7344
+          </a>
+        </div>
+
+        <p className={styles.meta}>Based in Saint John&apos;s, Antigua and Barbuda · Available remotely worldwide</p>
       </div>
     </section>
   );
